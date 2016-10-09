@@ -13,6 +13,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 public class QuizActivity extends AppCompatActivity {
     public static final String QUESTIONS = "pref_typeOfQuestions"; // What question will be asked
@@ -125,7 +126,8 @@ public class QuizActivity extends AppCompatActivity {
                         quizFragment.resetQuiz();
                     }
 
-                    Toast.makeText(QuizActivity.this, R.string.)
+                    Toast.makeText(QuizActivity.this, R.string.toast_text,
+                            Toast.LENGTH_SHORT).show();
                 }
-            }
+            };
 }
