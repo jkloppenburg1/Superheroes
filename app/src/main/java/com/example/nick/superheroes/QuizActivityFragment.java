@@ -136,5 +136,7 @@ public class QuizActivityFragment extends Fragment {
     }
 
     private void loadNextQuestion() //// Start working here
-}
+    {
 
+    }
+}
