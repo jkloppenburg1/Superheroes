@@ -268,9 +268,20 @@ public class QuizActivityFragment extends Fragment {
         }
     };
 
-    private String getCountryName(String name)
+    private String getAnswerChoice(String name)
     {
-        // pick up here
+        String answerChoice = name.substring(name.indexOf('-') + 1);
+        return answerChoice.replace('_', ' ');
+    }
+
+    private void disableButtons()
+    {
+        for (int row = 0; row < guessRows; row++)
+        {
+            LinearLayout guessRow = guessLinearLayouts[row];
+            for (int i = 0; i < guessRow.getChildCount(); i++)
+                guessRow.getChildAt(i).setEnabled(false);
+        }
     }
 
 }
