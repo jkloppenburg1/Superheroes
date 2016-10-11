@@ -11,12 +11,10 @@ import android.view.ViewGroup;
  */
 public class SettingsActivityFragment extends Fragment {
 
-    public SettingsActivityFragment() {
-    }
-
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_settings, container, false);
+    public void onCreate(Bundle bundle)
+    {
+        super.onCreate(bundle);
+        addPreferencesFromResource(R.xml.preferences); // load from xml
     }
 }

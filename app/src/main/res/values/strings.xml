@@ -6,5 +6,6 @@
     <string name="question">Question %1$d of %2$d</string>
     <string name="results">%1$d guesses, %2$.02f%% correct</string>
     <string name="reset_quiz">Reset Quiz</string>
+    <string name="incorrect_answer">Incorrect!</string>
 
 </resources>
