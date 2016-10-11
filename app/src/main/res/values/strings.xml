@@ -4,4 +4,7 @@
     <string name="title_activity_settings">SettingsActivity</string>
     <string name="toast_text">Quiz will restart with your new settings</string>
     <string name="question">Question %1$d of %2$d</string>
+    <string name="results">%1$d guesses, %2$.02f%% correct</string>
+    <string name="reset_quiz">Reset Quiz</string>
+
 </resources>
