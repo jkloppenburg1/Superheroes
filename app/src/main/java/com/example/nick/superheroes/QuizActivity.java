@@ -29,9 +29,7 @@ public class QuizActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         // set default values in SharedPreferences
-        PreferenceManager.getDefaultSharedPreferences(this).
-                registerOnSharedPreferenceChangeListener(
-                        preferencesChanged);
+        PreferenceManager.setDefaultValues(this, R.xml.preferences, false);
 
         // register listener for SharedPreferences
         PreferenceManager.getDefaultSharedPreferences(this).
