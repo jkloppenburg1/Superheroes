@@ -7,5 +7,6 @@
     <string name="results">%1$d guesses, %2$.02f%% correct</string>
     <string name="reset_quiz">Reset Quiz</string>
     <string name="incorrect_answer">Incorrect!</string>
-
+    <string name="type_of_quiz">Type of Quiz</string>
+    <string name="type_of_quiz_description">Which question to ask?</string>
 </resources>

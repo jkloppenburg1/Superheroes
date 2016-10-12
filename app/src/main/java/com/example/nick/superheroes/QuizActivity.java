@@ -16,7 +16,7 @@ import android.view.MenuItem;
 import android.widget.Toast;
 
 public class QuizActivity extends AppCompatActivity {
-    public static final String QUESTIONS = "pref_typeOfQuestions"; // What question will be asked
+    public static final String QUESTIONS = "pref_typeOfQuiz"; // What question will be asked
 
     private boolean phoneDevice = true; // used to force portrait mode
     private boolean preferencesChanged = true; // did preferences change?

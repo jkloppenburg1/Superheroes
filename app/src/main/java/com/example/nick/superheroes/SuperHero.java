@@ -5,39 +5,30 @@ package com.example.nick.superheroes;
  */
 
 public class SuperHero {
-    private String username;
-    private String name;
-    private String superpower;
-    private String oneThing;
 
-    SuperHero()
-    {
-        username = "";
-        name = "";
-        superpower = "";
-        oneThing = "";
-    }
+    public static String[] usernames =
+            {
+                    "rbarron11", "gbyers01", "jcabrera31", "kdo94",
+                    "bfazeli", "kfrederick5", "hho", "nhoang53",
+                    "fjuarez6", "dkim127", "jkloppenburg1", "wlee",
+                    "mmizukami", "tmorrissey1", "bnguyen336", "dnguyen1214",
+                    "snguyen171", "vnguyen629", "vnguyen678", "dnovasky",
+                    "rorellana2", "dpham147", "ischenk", "rsullivan11",
+                    "ltruong58", "mpaulding"
+            };
 
-    public SuperHero(String username, String name, String superpower, String oneThing) {
-        this.username = username;
-        this.name = name;
-        this.superpower = superpower;
-        this.oneThing = oneThing;
-    }
+    public static String[] names =
+            {
+                    "Roman B", "Grant B", "James C", "Kevin D",
+                    "Bijan F", "Keegan F", "Huy H", "Nguyen H",
+                    "Freddy J", "Austin K", "Justin K", "Wonseop L",
+                    "Mahiro M", "Travis M", "Benjamin N", "Duy N",
+                    "Son N", "Vincent N", "Vu N", "Donald N",
+                    "Romario O", "Danny P", "Ian S", "Ryan S",
+                    "Long T", "Michael P"
+            };
 
-    public String getUsername() {
-        return username;
-    }
+    //public static String[] superpower =
 
-    public String getName() {
-        return name;
-    }
-
-    public String getSuperpower() {
-        return superpower;
-    }
-
-    public String getOneThing() {
-        return oneThing;
-    }
+    //public static String[] oneThing =
 }

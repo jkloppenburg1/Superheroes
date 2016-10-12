@@ -37,7 +37,7 @@ public class QuizActivityFragment extends Fragment {
     private static final int NUMBER_OF_QUESTIONS = 10;
 
     private List<String> fileNameList; // image file names
-    private List<String> quizQuestionList; // question being asked
+    private List<String> quizHeroesList; // Heroes in current quiz
     private Set<String> questionsSet; // question to be asked
     private String correctAnswer; //correct answer for current question
     private int totalGuesses; // number of guesses made
@@ -62,7 +62,7 @@ public class QuizActivityFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_quiz, container, false);
 
         fileNameList = new ArrayList<>();
-        quizQuestionList = new ArrayList<>();
+        quizHeroesList = new ArrayList<>();
         random = new SecureRandom();
         handler = new Handler();
 
@@ -119,23 +119,23 @@ public class QuizActivityFragment extends Fragment {
     */
         correctAnswers = 0; // reset number of correct answers made
         totalGuesses = 0;
-        quizQuestionList.clear();
+        quizHeroesList.clear();
 
         int questionCounter = 1;
-        int numberOfQuestions = fileNameList.size();
+        int numberOfHeroes = SuperHero.usernames.length;
 
         // add NUMBER_OF_QUESTIONS random file names to the quizQuestionsList
         while (questionCounter <= NUMBER_OF_QUESTIONS)
         {
-            int randomIndex = random.nextInt(numberOfQuestions);
+            int randomIndex = random.nextInt(numberOfHeroes);
 
             // get the random file name
             String filename = fileNameList.get(randomIndex);
 
             // if the region is enabled and it hasn't already been chosen
-            if (!quizQuestionList.contains(filename))
+            if (!quizHeroesList.contains(filename))
             {
-                quizQuestionList.add(filename);
+                quizHeroesList.add(filename);
                 questionCounter++;
             }
         }
