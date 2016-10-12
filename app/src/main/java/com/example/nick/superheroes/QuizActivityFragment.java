@@ -52,8 +52,8 @@ public class QuizActivityFragment extends Fragment {
     private TextView answerTextView; //displays correct answer
 
 
-    public QuizActivityFragment() {
-    }
+ //   public QuizActivityFragment() {
+ //   }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -142,7 +142,7 @@ public class QuizActivityFragment extends Fragment {
         loadNextQuestion(); //start quiz by loading first question
     }
 
-    private void loadNextQuestion() //// Start working here
+    private void loadNextQuestion()
     {
         //get file name of the next flag and remove it from the list
         String nextImage = quizQuestionList.remove(0);
@@ -158,7 +158,7 @@ public class QuizActivityFragment extends Fragment {
 
         AssetManager assets = getActivity().getAssets();
 
-        // get an Input Stream to the asset representing the next flag
+        // get an Input Stream to the asset representing the next hero
         // and try to use the InputStream
         try (InputStream stream =
                 assets.open(region + "/" + nextImage + ".png"))
