@@ -222,9 +222,9 @@ public class QuizActivityFragment extends Fragment {
 
                 //display correct answer in green text
                 answerTextView.setText(answer + "!");
-       //         answerTextView.setTextColor(
-       //                 getResources().getColor(R.color.correct_answer,
-       //                         getContext().getTheme()));
+                answerTextView.setTextColor(
+                        getResources().getColor(R.color.correct_answer,
+                                getContext().getTheme()));
 
                 disableButtons(); // disable all guess Buttons
 
@@ -263,8 +263,8 @@ public class QuizActivityFragment extends Fragment {
                 {
                     // display "Incorrect!" in red
                     answerTextView.setText(R.string.incorrect_answer);
-                   // answerTextView.setTextColor(getResources().getColor(
-                   //         R.color.incorrect_answer, getContext().getTheme()));
+                    answerTextView.setTextColor(getResources().getColor(
+                            R.color.incorrect_answer, getContext().getTheme()));
                     guessButton.setEnabled(false); // disable incorrect answer
                 }
             }
