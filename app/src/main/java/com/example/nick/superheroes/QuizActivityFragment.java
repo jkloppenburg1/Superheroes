@@ -51,6 +51,8 @@ public class QuizActivityFragment extends Fragment {
     private LinearLayout[] guessLinearLayouts; // rows of answer buttons
     private TextView answerTextView; //displays correct answer
 
+    private String typeOfQuestion = "Name"; //filter which question which is asked
+
 
  //   public QuizActivityFragment() {
  //   }
@@ -91,8 +93,8 @@ public class QuizActivityFragment extends Fragment {
     }
 
     public void updateQuestion(SharedPreferences sharedPreferences) {
-        questionsSet =
-                sharedPreferences.getStringSet(QuizActivity.QUESTIONS, null);
+        typeOfQuestion =
+                sharedPreferences.getString(QuizActivity.QUESTIONS, null);
     }
 
     public void resetQuiz() {
@@ -145,7 +147,7 @@ public class QuizActivityFragment extends Fragment {
     private void loadNextQuestion()
     {
         //get file name of the next flag and remove it from the list
-        String nextImage = quizQuestionList.remove(0);
+        String nextImage = quizHeroesList.remove(0);
         correctAnswer = nextImage; // update the correct answer
         answerTextView.setText(""); // clear answerTetView
 
@@ -153,15 +155,15 @@ public class QuizActivityFragment extends Fragment {
         questionNumberTextView.setText(getString(
                 R.string.question, (correctAnswers + 1), NUMBER_OF_QUESTIONS));
 
-        // extract the region from the next image's name
-        String region = nextImage;
+        // extract the answer from the next image's name
+        String questionType = nextImage;
 
         AssetManager assets = getActivity().getAssets();
 
         // get an Input Stream to the asset representing the next hero
         // and try to use the InputStream
-        try (InputStream stream =
-                assets.open(region + "/" + nextImage + ".png"))
+ /*       try (InputStream stream =
+                assets.open(questionType) + "/" + nextImage + ".png"))
         {
             // load the asset as a Drawable and display on the flagImageView
             Drawable hero = Drawable.createFromStream(stream, nextImage);
@@ -171,6 +173,7 @@ public class QuizActivityFragment extends Fragment {
         {
             Log.e(TAG, "Error loading " + nextImage, exception);
         }
+  */
 
         Collections.shuffle(fileNameList); //shuffle file names
 
@@ -219,9 +222,9 @@ public class QuizActivityFragment extends Fragment {
 
                 //display correct answer in green text
                 answerTextView.setText(answer + "!");
-                answerTextView.setTextColor(
-                        getResources().getColor(R.color.correct_answer,
-                                getContext().getTheme()));
+       //         answerTextView.setTextColor(
+       //                 getResources().getColor(R.color.correct_answer,
+       //                         getContext().getTheme()));
 
                 disableButtons(); // disable all guess Buttons
 
@@ -260,8 +263,8 @@ public class QuizActivityFragment extends Fragment {
                 {
                     // display "Incorrect!" in red
                     answerTextView.setText(R.string.incorrect_answer);
-                    answerTextView.setTextColor(getResources().getColor(
-                            R.color.incorrect_answer, getContext().getTheme()));
+                   // answerTextView.setTextColor(getResources().getColor(
+                   //         R.color.incorrect_answer, getContext().getTheme()));
                     guessButton.setEnabled(false); // disable incorrect answer
                 }
             }

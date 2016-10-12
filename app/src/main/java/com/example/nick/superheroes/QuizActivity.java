@@ -120,7 +120,7 @@ public class QuizActivity extends AppCompatActivity {
 
                     if (key.equals(QUESTIONS))
                     {
-                        quizFragment.updateQuestion();
+                        quizFragment.updateQuestion(sharedPreferences);
                         quizFragment.resetQuiz();
                     }
 
