@@ -28,7 +28,26 @@ public class SuperHero {
                     "Long T", "Michael P"
             };
 
-    //public static String[] superpower =
+    public static String[] superpower =
+            {
+                    "Ability to tell cats to go way", "Retain all knowledge", "Telekinesis", "Shape-Shifting",
+                    "Eat with no constraints", "Technomancy", "Ability to fly", "Working hard",
+                    "Manipulation", "Control time", "Breathe underwater", "Ability to fly",
+                    "Speed reading", "Immortality", "Understand all languages", "Teleportation",
+                    "Mimic other powers", "Photographic memory", "Stop time when asleep", "Fly like superman",
+                    "Super-hack power", "Warp things", "Live forever", "Answers by inspiration",
+                    "Build the most popular app", "Super-caring teacher power"
+            };
 
-    //public static String[] oneThing =
+    public static String[] oneThing =
+            {
+                    "Does not like cats", "Loves to wrench", "Loves paddling on water", "Really wants a kitten",
+                    "Has B.S. in Microbiology", "Loves organizing games", "Asks weird questions", "Likes badminton",
+                    "Loves to travel", "Likes history and coding", "Wants to design games", "Loves to be in nature",
+                    "Loves any kind of games", "Great in bar fights", "Lives to play ping-pong", "Funny, foodie, traveler",
+                    "Gaming nerd", "Likes spam with banana sauce", "Enjoys playing games", "Dislikes Apple",
+                    "Loves long walks on beach", "Is a gamer", "Loves to backpack in wild", "Dislikes IDEs",
+                    "Favorite sport is volleyball",
+                    "Complete ocean nut"
+            };
 }
