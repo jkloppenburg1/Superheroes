@@ -98,6 +98,7 @@ public class QuizActivityFragment extends Fragment {
                 (LinearLayout) view.findViewById(R.id.row1LinearLayout);
         guessLinearLayouts[1] =
                 (LinearLayout) view.findViewById(R.id.row2LinearLayout);
+        answerTextView = (TextView) view.findViewById(R.id.answerTextView);
 
         // configure listeners for the guess Buttons
         for (LinearLayout row : guessLinearLayouts) {
