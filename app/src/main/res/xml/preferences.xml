@@ -5,7 +5,7 @@
         android:key="pref_typeOfQuiz"
         android:title="@string/type_of_quiz"
         android:summary="@string/type_of_quiz_description"
-        android:persistent="true" android:defaultValue="4"/>
+        android:persistent="true"/>
 <!--
     <MultiSelectListPreference
         android:entries="@array/regions_list_for_settings"

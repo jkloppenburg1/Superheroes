@@ -47,7 +47,6 @@ public class SuperHero {
                     "Loves any kind of games", "Great in bar fights", "Lives to play ping-pong", "Funny, foodie, traveler",
                     "Gaming nerd", "Likes spam with banana sauce", "Enjoys playing games", "Dislikes Apple",
                     "Loves long walks on beach", "Is a gamer", "Loves to backpack in wild", "Dislikes IDEs",
-                    "Favorite sport is volleyball",
-                    "Complete ocean nut"
+                    "Favorite sport is volleyball", "Complete ocean nut"
             };
 }

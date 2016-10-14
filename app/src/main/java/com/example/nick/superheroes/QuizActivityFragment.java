@@ -27,6 +27,9 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 
+import static android.R.attr.type;
+import static com.example.nick.superheroes.R.string.question;
+
 /**
  * A placeholder fragment containing a simple view.
  */
@@ -36,10 +39,10 @@ public class QuizActivityFragment extends Fragment {
 
     private static final int NUMBER_OF_QUESTIONS = 10;
 
-    private List<String> fileNameList; // image file names
+//    private List<String> fileNameList; // image file names
     private List<String> quizHeroesList; // Heroes in current quiz
-    private Set<String> questionsSet; // question to be asked
-    private String correctAnswer; //correct answer for current question
+//    private Set<String> imageSet; // worldRegions in current quiz
+    private int correctAnswer; //position of correct answer for current question
     private int totalGuesses; // number of guesses made
     private int correctAnswers; // number of correct guesses
     private int guessRows = 2;
@@ -51,7 +54,10 @@ public class QuizActivityFragment extends Fragment {
     private LinearLayout[] guessLinearLayouts; // rows of answer buttons
     private TextView answerTextView; //displays correct answer
 
-    private String typeOfQuestion = "Name"; //filter which question which is asked
+    private String typeOfQuestion; //filter which question which is asked
+    private boolean[] answeredArray; // Array that keeps track of previous answers in current quiz
+    private String[] answers; //Array that holds correct answers, copied from SuperHero
+    private int pos; //Integer that keeps track of correct answer
 
 
  //   public QuizActivityFragment() {
@@ -63,10 +69,25 @@ public class QuizActivityFragment extends Fragment {
         super.onCreateView(inflater, container, savedInstanceState);
         View view = inflater.inflate(R.layout.fragment_quiz, container, false);
 
-        fileNameList = new ArrayList<>();
+        //fileNameList = new ArrayList<>();
         quizHeroesList = new ArrayList<>();
         random = new SecureRandom();
         handler = new Handler();
+
+        //Set typeOfQuestion to array of answers
+
+
+        //Set questions that have been answered
+        answeredArray = new boolean[SuperHero.usernames.length];
+
+        for (int i = 0; i < answeredArray.length; i++)
+        {
+            answeredArray[i] = false;
+        }
+
+
+
+        //imageSet = SuperHero.usernames;
 
         // get references to GUI
         questionNumberTextView =
@@ -88,51 +109,75 @@ public class QuizActivityFragment extends Fragment {
 
         // set questionNumberTextView's text
         questionNumberTextView.setText(
-                getString(R.string.question, 1, NUMBER_OF_QUESTIONS));
+                getString(question, 1, NUMBER_OF_QUESTIONS));
         return view;
     }
 
+    //Updates the array 'answers' to match the question type
     public void updateQuestion(SharedPreferences sharedPreferences) {
         typeOfQuestion =
                 sharedPreferences.getString(QuizActivity.QUESTIONS, null);
+        if (typeOfQuestion == "Names")
+        {
+            answers = SuperHero.names;
+        }
+        else if (typeOfQuestion == "Superpower")
+        {
+            answers = SuperHero.superpower;
+        }
+        else
+        {
+            answers = SuperHero.oneThing;
+        }
     }
 
     public void resetQuiz() {
+
+
         //use AssetManager to get image file names for enabled regions
         AssetManager assets = getActivity().getAssets();
-        fileNameList.clear(); // empty list of image file names
+//        fileNameList.clear(); // empty list of image file names
 
+        /*
         for (String question : questionsSet) {
             fileNameList.add(question.replace(".png", ""));
         }
-/*
+
+
+
         try
         {
-            for (String question : questionsSet)
+            for (String image : imageSet)
             {
-                fileNameList.add(question.replace(".png", ""));
+                fileNameList.add(image.replace(".png", ""));
             }
         }
         catch (IOException exception)
         {
             Log.e(TAG, "Error loading image file names", exception);
         }
-    }
-    */
+        */
+
+
         correctAnswers = 0; // reset number of correct answers made
         totalGuesses = 0;
         quizHeroesList.clear();
+        // Reset check for previous answers
+        for (int i = 0; i < answeredArray.length; i++)
+        {
+            answeredArray[i] = false;
+        }
 
         int questionCounter = 1;
         int numberOfHeroes = SuperHero.usernames.length;
-
+/*
         // add NUMBER_OF_QUESTIONS random file names to the quizQuestionsList
         while (questionCounter <= NUMBER_OF_QUESTIONS)
         {
             int randomIndex = random.nextInt(numberOfHeroes);
 
             // get the random file name
-            String filename = fileNameList.get(randomIndex);
+      //      String filename = fileNameList.get(randomIndex);
 
             // if the region is enabled and it hasn't already been chosen
             if (!quizHeroesList.contains(filename))
@@ -140,25 +185,37 @@ public class QuizActivityFragment extends Fragment {
                 quizHeroesList.add(filename);
                 questionCounter++;
             }
+
         }
+        */
         loadNextQuestion(); //start quiz by loading first question
     }
 
     private void loadNextQuestion()
     {
+        //get position of next flag
+        pos = random.nextInt(SuperHero.usernames.length);
+        // check if position has been used
+        while (answeredArray[pos])
+        {
+            pos = random.nextInt(SuperHero.usernames.length);
+        }
+        //current position used
+        answeredArray[pos] = true;
+
         //get file name of the next flag and remove it from the list
-        String nextImage = quizHeroesList.remove(0);
-        correctAnswer = nextImage; // update the correct answer
-        answerTextView.setText(""); // clear answerTetView
+        String nextImage = SuperHero.usernames[pos] + ".png";
+        correctAnswer = pos; // update the correct answer
+        answerTextView.setText(""); // clear answerTextView
 
         // display current question number
         questionNumberTextView.setText(getString(
-                R.string.question, (correctAnswers + 1), NUMBER_OF_QUESTIONS));
+                question, (correctAnswers + 1), NUMBER_OF_QUESTIONS));
 
         // extract the answer from the next image's name
-        String questionType = nextImage;
+        //String questionType = nextImage;
 
-        AssetManager assets = getActivity().getAssets();
+ //       AssetManager assets = getActivity().getAssets();
 
         // get an Input Stream to the asset representing the next hero
         // and try to use the InputStream
@@ -175,13 +232,62 @@ public class QuizActivityFragment extends Fragment {
         }
   */
 
-        Collections.shuffle(fileNameList); //shuffle file names
+        //Collections.shuffle(SuperHero.usernames); //shuffle file names
 
         // put the correct answer at the end of fileNameList
-        int correct = fileNameList.indexOf(correctAnswer);
-        fileNameList.add(fileNameList.remove(correct));
+        //int correct = fileNameList.indexOf(correctAnswer);
+        //fileNameList.add(fileNameList.remove(correct));
 
         // add guess Buttons based on value of guessRows
+        int choice1 = random.nextInt(SuperHero.usernames.length);
+        int choice2 = random.nextInt(SuperHero.usernames.length);
+        int choice3 = random.nextInt(SuperHero.usernames.length);
+        int choice4 = random.nextInt(SuperHero.usernames.length);
+
+
+        //verify none of the answers overlap, // will become infinite if not enough choices
+        while (choice1 == pos)
+        {
+            choice1++;
+            if (choice1 >= SuperHero.usernames.length)
+                choice1 = 0;
+        }
+        while (choice2 == pos || choice2 == choice1)
+        {
+            choice2++;
+            if (choice2 >= SuperHero.usernames.length)
+                choice2 = 0;
+        }
+        while (choice3 == pos || choice3 == choice2 || choice3 == choice1)
+        {
+            choice3++;
+            if (choice3 >= SuperHero.usernames.length)
+                choice3 = 0;
+        }
+        while (choice4 == pos || choice4 == choice3 || choice4 == choice2 || choice4 == choice1)
+        {
+            choice4++;
+            if (choice4 >= SuperHero.usernames.length)
+                choice4 = 0;
+        }
+
+        //Button 1
+        Button newGuessButton = (Button) guessLinearLayouts[0].getChildAt(0);
+        newGuessButton.setText(answers[choice1]);
+
+        //Button 2
+        newGuessButton = (Button) guessLinearLayouts[0].getChildAt(1);
+        newGuessButton.setText(answers[choice1]);
+
+        //Button 3
+        newGuessButton = (Button) guessLinearLayouts[1].getChildAt(0);
+        newGuessButton.setText(answers[choice1]);
+
+        //Button 4
+        newGuessButton = (Button) guessLinearLayouts[1].getChildAt(1);
+        newGuessButton.setText(answers[choice1]);
+
+        /*
         for (int row = 0; row < guessRows; row++)
         {
             //place Buttons in currentTableRow
@@ -195,17 +301,17 @@ public class QuizActivityFragment extends Fragment {
                 newGuessButton.setEnabled(true);
 
                 // get answer choice and set it to newGuessButton's text
-                String filename = fileNameList.get((row * 2) + column);
-                newGuessButton.setText(getAnswerChoice(filename));
+                newGuessButton.setText(SuperHero.names[choice1]);
             }
         }
+        */
 
         // randomly replace one Button with the correct answer
         int row = random.nextInt(guessRows); // pick random row
         int column = random.nextInt(2); // pick random column
         LinearLayout randomRow = guessLinearLayouts[row]; // get the row
-        String answerChoice = getAnswerChoice(correctAnswer);
-        ((Button) randomRow.getChildAt(column)).setText(answerChoice);
+        //String answerChoice = getAnswerChoice(correctAnswer);
+        ((Button) randomRow.getChildAt(column)).setText(answers[pos]);
     }
 
     private View.OnClickListener guessButtonListener = new View.OnClickListener() {
@@ -213,7 +319,7 @@ public class QuizActivityFragment extends Fragment {
         public void onClick(View v) {
             Button guessButton = ((Button) v);
             String guess = guessButton.getText().toString();
-            String answer = getAnswerChoice(correctAnswer);
+            String answer = answers[pos];
             totalGuesses++; //increment number of guesses user has made
 
             if (guess.equals(answer)) // if guess is correct
@@ -231,7 +337,7 @@ public class QuizActivityFragment extends Fragment {
                 // if the user has correctly identified NUMBER_OF_QUESTIONS answers
                 if (correctAnswers == NUMBER_OF_QUESTIONS)
                 {
-                    // DialogFragment to displa quiz stats and start new quiz
+                    // DialogFragment to display quiz stats and start new quiz
                     DialogFragment quizResults =
                             new DialogFragment()
                             {
@@ -271,11 +377,13 @@ public class QuizActivityFragment extends Fragment {
         }
     };
 
+    /*
     private String getAnswerChoice(String name)
     {
         String answerChoice = name.substring(name.indexOf('-') + 1);
         return answerChoice.replace('_', ' ');
     }
+    */
 
     private void disableButtons()
     {
