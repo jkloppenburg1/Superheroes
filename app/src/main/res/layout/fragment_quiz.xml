@@ -33,20 +33,27 @@
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center"
-        android:id="@+id/row1LinearLayout">
+        android:gravity="center_horizontal"
+        android:id="@+id/row1LinearLayout"
+        android:layout_gravity="center_horizontal">
 
         <Button
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="New Button"
-            android:id="@+id/button" />
+            android:id="@+id/button"
+            android:layout_gravity="center_horizontal"
+            android:layout_weight="1"
+            android:gravity="center" />
 
         <Button
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="New Button"
-            android:id="@+id/button2" />
+            android:text="Button"
+            android:id="@+id/button2"
+            android:layout_gravity="center_horizontal"
+            android:layout_weight="1"
+            android:gravity="center" />
 
     </LinearLayout>
 
@@ -54,20 +61,27 @@
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center"
-        android:id="@+id/row2LinearLayout">
+        android:gravity="center_horizontal"
+        android:id="@+id/row2LinearLayout"
+        android:layout_gravity="center_horizontal">
 
         <Button
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="New Button"
-            android:id="@+id/button3" />
+            android:id="@+id/button3"
+            android:layout_gravity="center_horizontal"
+            android:layout_weight="1"
+            android:gravity="center" />
 
         <Button
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="New Button"
-            android:id="@+id/button4" />
+            android:id="@+id/button4"
+            android:layout_gravity="center_horizontal"
+            android:layout_weight="1"
+            android:gravity="center" />
     </LinearLayout>
 
     <TextView

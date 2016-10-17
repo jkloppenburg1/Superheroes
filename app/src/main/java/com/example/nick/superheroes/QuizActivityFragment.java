@@ -19,6 +19,8 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import org.w3c.dom.Text;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.security.SecureRandom;
@@ -50,6 +52,7 @@ public class QuizActivityFragment extends Fragment {
     private Handler handler; // used to delay loading next flag
 
     private TextView questionNumberTextView;
+    private TextView questionTextView;
     private ImageView heroImageView;
     private LinearLayout[] guessLinearLayouts; // rows of answer buttons
     private TextView answerTextView; //displays correct answer
@@ -92,6 +95,7 @@ public class QuizActivityFragment extends Fragment {
         // get references to GUI
         questionNumberTextView =
                 (TextView) view.findViewById(R.id.questionNumberTextView);
+        questionTextView = (TextView) view.findViewById(R.id.questionTextView);
         heroImageView = (ImageView) view.findViewById(R.id.heroImageView);
         guessLinearLayouts = new LinearLayout[2];
         guessLinearLayouts[0] =
@@ -118,17 +122,20 @@ public class QuizActivityFragment extends Fragment {
     public void updateQuestion(SharedPreferences sharedPreferences) {
         typeOfQuestion =
                 sharedPreferences.getString(QuizActivity.QUESTIONS, null);
-        if (typeOfQuestion == "Name")
+        if (typeOfQuestion.equals("Name"))
         {
             answers = SuperHero.names;
+            questionTextView.setText(R.string.ask_hero_name);
         }
-        else if (typeOfQuestion == "Superpower")
+        else if (typeOfQuestion.equals("Superpower"))
         {
             answers = SuperHero.superpower;
+            questionTextView.setText(R.string.ask_hero_superpower);
         }
         else
         {
             answers = SuperHero.oneThing;
+            questionTextView.setText(R.string.ask_hero_one_thing);
         }
     }
 

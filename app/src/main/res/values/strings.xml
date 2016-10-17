@@ -9,4 +9,7 @@
     <string name="incorrect_answer">Incorrect!</string>
     <string name="type_of_quiz">Type of Quiz</string>
     <string name="type_of_quiz_description">Which question to ask?</string>
+    <string name="ask_hero_name">Who is the superhero?</string>
+    <string name="ask_hero_superpower">What is my superpower?</string>
+    <string name="ask_hero_one_thing">What is one thing you should know?</string>
 </resources>
