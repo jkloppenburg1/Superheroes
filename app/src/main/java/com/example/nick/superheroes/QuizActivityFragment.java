@@ -348,7 +348,7 @@ public class QuizActivityFragment extends Fragment {
                 disableButtons(); // disable all guess Buttons
 
                 // if the user has correctly identified NUMBER_OF_QUESTIONS answers
-                if (correctAnswers == NUMBER_OF_QUESTIONS)
+                if (correctAnswers >= NUMBER_OF_QUESTIONS)
                 {
                     // DialogFragment to display quiz stats and start new quiz
                     DialogFragment quizResults =
@@ -366,8 +366,7 @@ public class QuizActivityFragment extends Fragment {
                                     // "Reset Quiz" Button
                                     builder.setPositiveButton(R.string.reset_quiz,
                                             new DialogInterface.OnClickListener() {
-                                                @Override
-                                                public void onClick(DialogInterface dialog, int which) {
+                                                public void onClick(DialogInterface dialog, int id) {
                                                     resetQuiz();
                                                 }
                                             });
