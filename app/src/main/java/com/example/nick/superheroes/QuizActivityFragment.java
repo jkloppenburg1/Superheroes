@@ -118,7 +118,7 @@ public class QuizActivityFragment extends Fragment {
     public void updateQuestion(SharedPreferences sharedPreferences) {
         typeOfQuestion =
                 sharedPreferences.getString(QuizActivity.QUESTIONS, null);
-        if (typeOfQuestion == "Names")
+        if (typeOfQuestion == "Name")
         {
             answers = SuperHero.names;
         }
@@ -201,6 +201,7 @@ public class QuizActivityFragment extends Fragment {
         {
             pos = random.nextInt(SuperHero.usernames.length);
         }
+
         //current position used
         answeredArray[pos] = true;
 
@@ -216,12 +217,12 @@ public class QuizActivityFragment extends Fragment {
         // extract the answer from the next image's name
         //String questionType = nextImage;
 
- //       AssetManager assets = getActivity().getAssets();
+        AssetManager assets = getActivity().getAssets();
 
         // get an Input Stream to the asset representing the next hero
         // and try to use the InputStream
- /*       try (InputStream stream =
-                assets.open(questionType) + "/" + nextImage + ".png"))
+        try (InputStream stream =
+                assets.open(nextImage))
         {
             // load the asset as a Drawable and display on the flagImageView
             Drawable hero = Drawable.createFromStream(stream, nextImage);
@@ -231,7 +232,7 @@ public class QuizActivityFragment extends Fragment {
         {
             Log.e(TAG, "Error loading " + nextImage, exception);
         }
-  */
+
 
         //Collections.shuffle(SuperHero.usernames); //shuffle file names
 
@@ -275,18 +276,22 @@ public class QuizActivityFragment extends Fragment {
         //Button 1
         Button newGuessButton = (Button) guessLinearLayouts[0].getChildAt(0);
         newGuessButton.setText(answers[choice1]);
+        newGuessButton.setEnabled(true);
 
         //Button 2
         newGuessButton = (Button) guessLinearLayouts[0].getChildAt(1);
-        newGuessButton.setText(answers[choice1]);
+        newGuessButton.setText(answers[choice2]);
+        newGuessButton.setEnabled(true);
 
         //Button 3
         newGuessButton = (Button) guessLinearLayouts[1].getChildAt(0);
-        newGuessButton.setText(answers[choice1]);
+        newGuessButton.setText(answers[choice3]);
+        newGuessButton.setEnabled(true);
 
         //Button 4
         newGuessButton = (Button) guessLinearLayouts[1].getChildAt(1);
-        newGuessButton.setText(answers[choice1]);
+        newGuessButton.setText(answers[choice4]);
+        newGuessButton.setEnabled(true);
 
         /*
         for (int row = 0; row < guessRows; row++)
@@ -328,10 +333,10 @@ public class QuizActivityFragment extends Fragment {
                 correctAnswers++; // increment the number of correct answers
 
                 //display correct answer in green text
-                answerTextView.setText(answer + "!");
-                answerTextView.setTextColor(
-                        getResources().getColor(R.color.correct_answer,
-                                getContext().getTheme()));
+                answerTextView.setText(answer);
+                //answerTextView.setTextColor(
+                //getResources().getColor(R.color.correct_answer,
+                //getContext().getTheme()));
 
                 disableButtons(); // disable all guess Buttons
 
@@ -340,12 +345,10 @@ public class QuizActivityFragment extends Fragment {
                 {
                     // DialogFragment to display quiz stats and start new quiz
                     DialogFragment quizResults =
-                            new DialogFragment()
-                            {
+                            new DialogFragment() {
                                 //create an AlertDialog and return it
                                 @Override
-                                public Dialog onCreateDialog(Bundle bundle)
-                                {
+                                public Dialog onCreateDialog(Bundle bundle) {
                                     AlertDialog.Builder builder =
                                             new AlertDialog.Builder(getActivity());
                                     builder.setMessage(
@@ -366,17 +369,30 @@ public class QuizActivityFragment extends Fragment {
                                 }
                             };
                 }
+                else //Answer is correct but quiz is not over
+                {
+                    // load next question after a 2-second delay
+                    handler.postDelayed(
+                            new Runnable() {
+                                @Override
+                                public void run() {
+                                    loadNextQuestion();
+                                }
+                            }, 2000); // 2000 milliseconds
+                            }
+                }
+
+
                 else // answer was incorrect
                 {
                     // display "Incorrect!" in red
                     answerTextView.setText(R.string.incorrect_answer);
-                    answerTextView.setTextColor(getResources().getColor(
-                            R.color.incorrect_answer, getContext().getTheme()));
+                    //answerTextView.setTextColor(getResources().getColor(
+                    //        R.color.incorrect_answer, getContext().getTheme()));
                     guessButton.setEnabled(false); // disable incorrect answer
                 }
             }
-        }
-    };
+        };
 
     /*
     private String getAnswerChoice(String name)
