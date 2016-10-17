@@ -39,7 +39,7 @@ public class QuizActivityFragment extends Fragment {
     // String for logging errors
     private static final String TAG = "FlagQuiz Activity";
 
-    private static final int NUMBER_OF_QUESTIONS = 10;
+    private static final int NUMBER_OF_QUESTIONS = 2;
 
 //    private List<String> fileNameList; // image file names
     private List<String> quizHeroesList; // Heroes in current quiz
@@ -122,6 +122,10 @@ public class QuizActivityFragment extends Fragment {
     public void updateQuestion(SharedPreferences sharedPreferences) {
         typeOfQuestion =
                 sharedPreferences.getString(QuizActivity.QUESTIONS, null);
+        if (typeOfQuestion == null)
+        {
+            typeOfQuestion = "Name";
+        }
         if (typeOfQuestion.equals("Name"))
         {
             answers = SuperHero.names;
@@ -366,14 +370,19 @@ public class QuizActivityFragment extends Fragment {
                                     // "Reset Quiz" Button
                                     builder.setPositiveButton(R.string.reset_quiz,
                                             new DialogInterface.OnClickListener() {
-                                                public void onClick(DialogInterface dialog, int id) {
+                                                public void onClick(DialogInterface dialog,
+                                                                    int id) {
                                                     resetQuiz();
                                                 }
-                                            });
+                                            }
+                                    );
 
                                     return builder.create(); // return the AlertDialog
                                 }
                             };
+                    // use a fragment to display the DialogFragment
+                    quizResults.setCancelable(false);
+                    quizResults.show(getFragmentManager(), "quiz results");
                 }
                 else //Answer is correct but quiz is not over
                 {
