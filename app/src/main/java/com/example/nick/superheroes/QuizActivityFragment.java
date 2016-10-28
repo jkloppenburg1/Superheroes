@@ -2,14 +2,14 @@ package com.example.nick.superheroes;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.app.DialogFragment;
+import android.app.Fragment;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.content.res.AssetManager;
 import android.graphics.drawable.Drawable;
-import android.os.Handler;
-import android.support.v4.app.DialogFragment;
-import android.support.v4.app.Fragment;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,17 +19,12 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import org.w3c.dom.Text;
-
 import java.io.IOException;
 import java.io.InputStream;
 import java.security.SecureRandom;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
-import java.util.Set;
 
-import static android.R.attr.type;
 import static com.example.nick.superheroes.R.string.question;
 
 /**
@@ -39,7 +34,7 @@ public class QuizActivityFragment extends Fragment {
     // String for logging errors
     private static final String TAG = "FlagQuiz Activity";
 
-    private static final int NUMBER_OF_QUESTIONS = 2;
+    private static final int NUMBER_OF_QUESTIONS = 10;
 
 //    private List<String> fileNameList; // image file names
     private List<String> quizHeroesList; // Heroes in current quiz
@@ -345,9 +340,9 @@ public class QuizActivityFragment extends Fragment {
 
                 //display correct answer in green text
                 answerTextView.setText(answer);
-                //answerTextView.setTextColor(
-                //getResources().getColor(R.color.correct_answer,
-                //getContext().getTheme()));
+                answerTextView.setTextColor(
+                getResources().getColor(R.color.correct_answer,
+                getContext().getTheme()));
 
                 disableButtons(); // disable all guess Buttons
 
@@ -365,7 +360,7 @@ public class QuizActivityFragment extends Fragment {
                                     builder.setMessage(
                                             getString(R.string.results,
                                                     totalGuesses,
-                                                    1000 / (double) totalGuesses));
+                                                    (100 / (double) totalGuesses)));
 
                                     // "Reset Quiz" Button
                                     builder.setPositiveButton(R.string.reset_quiz,
@@ -402,8 +397,8 @@ public class QuizActivityFragment extends Fragment {
                 {
                     // display "Incorrect!" in red
                     answerTextView.setText(R.string.incorrect_answer);
-                    //answerTextView.setTextColor(getResources().getColor(
-                    //        R.color.incorrect_answer, getContext().getTheme()));
+                    answerTextView.setTextColor(getResources().getColor(
+                            R.color.incorrect_answer, getContext().getTheme()));
                     guessButton.setEnabled(false); // disable incorrect answer
                 }
             }
